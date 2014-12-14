@@ -208,15 +208,15 @@
     </Reference>
     <Reference Include="Sportner.Dto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Sportner.Dto.dll</HintPath>
+      <HintPath>..\Sportner.Dto.dll</HintPath>
     </Reference>
     <Reference Include="Sportner.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Sportner.Messages.dll</HintPath>
+      <HintPath>..\Sportner.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Sportner.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Sportner.Models.dll</HintPath>
+      <HintPath>..\Sportner.Models.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Extensions.dll</HintPath>
