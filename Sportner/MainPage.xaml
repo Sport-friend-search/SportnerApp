@@ -1,0 +1,54 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Sportner"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    x:Class="Sportner.MainPage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <CommandBar Margin="0">
+            <AppBarButton  Label="paieška" Icon="Find" Click="AppBarButton_Click_4"/>
+            <AppBarButton  Label="įvykiai" Icon="ContactInfo" Click="AppBarButton_Click_5"/>
+            <AppBarButton  Label="sportneriai" Icon="SolidStar" Click="AppBarButton_Click_6"/>
+            <AppBarButton  Label="pranešimai" Icon="Mail" Click="AppBarButton_Click_7"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton  Label="profilis" Click="AppBarButton_Click_2"/>
+                <AppBarButton  Label="nustatymai" Click="AppBarButton_Click_3"/>
+                <AppBarButton  Label="atsijungti" Click="AppBarButton_Click_8"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid>
+        <Maps:MapControl x:Name="MyMap" MapTapped="MyMap_MapTapped"/>
+        <AppBarButton HorizontalAlignment="Left" Icon="Add" Label="" Margin="-10,-2,0,0" VerticalAlignment="Top" Height="60" Width="67" Foreground="White" Click="AppBarButton_Click"/>
+        <AppBarButton HorizontalAlignment="Left" Icon="Remove" Label="" Margin="34,-2,0,0" VerticalAlignment="Top" Height="60" Width="76" Foreground="White" Click="AppBarButton_Click_1"/>
+        <AppBarButton HorizontalAlignment="Left" Icon="More" Label="" Margin="331,-2,0,0" VerticalAlignment="Top" Foreground="#FF131313" RequestedTheme="Light" Height="58" Width="69">
+            <AppBarButton.Flyout>
+                <Flyout>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                            <TextBlock Text="greitas filtravimas" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image x:Name="basketButton" Height="65" Width="65" Source="Assets/Basketball-icon.png" Stretch="None" Tapped="basketButton_Tapped"/>
+                            <Image x:Name="soccerButton" Height="65" Width="65" Source="Assets/Soccer-icon.png" Stretch="None" Tapped="soccerButton_Tapped"/>
+                            <Image x:Name="volleyButton" Height="65" Width="65" Stretch="None" Source="Assets/Volleyball-icon.png" Tapped="volleyButton_Tapped"/>
+                            <Image x:Name="tennisButton" Height="65" Width="65" Stretch="None" Source="Assets/Tennis-icon.png" Tapped="tennisButton_Tapped"/>
+                        </StackPanel>
+                        <ToggleSwitch x:Name="pitchesSwitch" OffContent="nerodomos" OnContent="rodomos" Header="aikštelės" RequestedTheme="Dark" BorderThickness="0" Height="60" Margin="65,0" Toggled="ToggleSwitch_Toggled"/>
+                        <ToggleSwitch x:Name="trainingsSwitch" OffContent="nerodomos" OnContent="rodomos" Header="treniruotes" RequestedTheme="Dark" BorderThickness="0" Height="60" Margin="65,0,65,20" IsOn="True" Toggled="ToggleSwitch_Toggled_1"/>
+                        <TextBlock x:Name="header1" TextWrapping="Wrap" Text="atstumas aplink mane" FontSize="16" Margin="65,0,0,-10" Foreground="#FF979797"/>
+                        <Slider x:Name="slider1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="269" Header="" Value="20" Margin="0,0,0,-10" ValueChanged="slider1_ValueChanged"/>
+                        <TextBlock x:Name="distanceInfo" TextWrapping="Wrap" Text="20 km" FontSize="12" Margin="0,-15,0,0" Foreground="#FFFFFFFF" TextAlignment="Center"/>
+                        <TextBlock x:Name="header2" TextWrapping="Wrap" Text="laikas iki įvykio" FontSize="16" Margin="65,0,0,-10" Foreground="#FF979797"/>
+                        <Slider x:Name="slider2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="267" Header="" Value="12" Maximum="24" ValueChanged="slider2_ValueChanged"/>
+                        <TextBlock x:Name="timeInfo" TextWrapping="Wrap" Text="12 h" FontSize="12" Margin="0,-25,0,0" Foreground="#FFFFFFFF" TextAlignment="Center"/>
+                    </StackPanel>
+                </Flyout>
+            </AppBarButton.Flyout>
+        </AppBarButton>
+    </Grid>
+</Page>

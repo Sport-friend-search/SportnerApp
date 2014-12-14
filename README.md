@@ -1,4 +1,4 @@
-SportnerApp
+SportnerAPP
 ===========
 
-Sportner application
+Sportner application for PSI

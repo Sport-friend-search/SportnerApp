@@ -1,0 +1,7 @@
+packages/*
+Sportner/bin/*
+Sportner/obj/*
+Sportner/debug/*
+RestAPIClient/bin/*
+RestAPIClient/obj/*
+RestAPIClient/debug/*

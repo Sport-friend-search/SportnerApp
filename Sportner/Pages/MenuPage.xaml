@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Sportner.MenuPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Sportner"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot x:Name="menuPivot" Title="Meniu">
+            <PivotItem Header="detali paieška">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="mano įvykiai">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="sportneriai">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="pranešimai">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="profilis">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="nustatymai">
+                <Grid/>
+            </PivotItem>
+        </Pivot>
+
+    </Grid>
+</Page>
