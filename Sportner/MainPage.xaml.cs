@@ -198,7 +198,7 @@ namespace Sportner
                 if (result.Status == MapLocationFinderStatus.Success)
                 {
                     string address = result.Locations[0].Address.Street + " " + result.Locations[0].Address.StreetNumber + ", " + result.Locations[0].Address.Town;
-                    resultText.AppendLine("Sukurti naują įvyki adresu " + address + "?");
+                    resultText.AppendLine("Sukurti naują įvykį adresu " + address + "?");
                 }
                 MessageDialog dialog = new MessageDialog(resultText.ToString());
                 dialog.Commands.Add(new UICommand("taip", new UICommandInvokedHandler(this.CommandInvokedHandler)));
