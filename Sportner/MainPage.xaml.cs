@@ -217,7 +217,7 @@ namespace Sportner
 
         private void addPins(Sports type, PointType ptype, TimeSpan time)
         {
-            var filteredPoints = points.Where(p => p.SportsType.Equals(type)).Where(pt => pt.TypeOfPoint.Equals(ptype)).Where(pn => pn.Date <= DateTime.Now.Add(time));
+            var filteredPoints = points.Where(p => p.SportsType.Equals(type)).Where(pt => pt.TypeOfPoint.Equals(ptype)).Where(pn => pn.Date <= DateTime.Now.Add(time) && pn.Date > DateTime.Now);
             foreach (EventPoint point in filteredPoints)
             {
                 Point anchorPoint = new Point(0.5, 0.5);
