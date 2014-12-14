@@ -103,6 +103,10 @@ namespace Sportner
             var getev = await eController.GetAllEventsPoints();
             points.Clear();
             points.AddRange(getev);
+            //removePins(Sports.Basketball);
+            //removePins(Sports.Soccer);
+            //removePins(Sports.Tennis);
+            //removePins(Sports.Volleyball);
             if (trainingsSwitch.IsOn)
             {
                 showTrainings();
@@ -188,24 +192,23 @@ namespace Sportner
             else
             {
                 var resultText = new StringBuilder();
-                resultText.AppendLine(string.Format("Naujo įvykio sukūrimas koordinatėse: {0:F9}, {1:F9}", args.Location.Position.Latitude, args.Location.Position.Longitude));
                 selectedPoint = new Geopoint(new BasicGeoposition{ Latitude = args.Location.Position.Latitude, Longitude = args.Location.Position.Longitude});
                
                 MapLocationFinderResult result = await MapLocationFinder.FindLocationsAtAsync(new Geopoint(args.Location.Position));
                 if (result.Status == MapLocationFinderStatus.Success)
                 {
                     string address = result.Locations[0].Address.Street + " " + result.Locations[0].Address.StreetNumber + ", " + result.Locations[0].Address.Town;
-                    resultText.AppendLine("Adresas: " + address);
+                    resultText.AppendLine("Sukurti naują įvyki adresu " + address + "?");
                 }
                 MessageDialog dialog = new MessageDialog(resultText.ToString());
-                dialog.Commands.Add(new UICommand("sukurti", new UICommandInvokedHandler(this.CommandInvokedHandler)));
-                dialog.Commands.Add(new UICommand("uždaryti", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                dialog.Commands.Add(new UICommand("taip", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                dialog.Commands.Add(new UICommand("ne", new UICommandInvokedHandler(this.CommandInvokedHandler)));
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => await dialog.ShowAsync());
             }
         }
         private void CommandInvokedHandler(IUICommand command)
         {
-            if (command.Label.Equals("sukurti"))
+            if (command.Label.Equals("taip"))
             {
                 Frame.Navigate(typeof(AddEventPage), selectedPoint);
             }
