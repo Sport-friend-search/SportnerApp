@@ -89,7 +89,7 @@ namespace Sportner
                 try
                 {
                     Geoposition myPosition = await MapController.GetMyLocation();
-                    await MyMap.TrySetViewAsync(myPosition.Coordinate.Point, 14, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
+                    await MyMap.TrySetViewAsync(myPosition.Coordinate.Point, 15, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
                 }
                 catch (UnauthorizedAccessException ex)
                 {
@@ -130,7 +130,7 @@ namespace Sportner
                 // TODO GPS TURNED OFF AND ETC.
             }
 
-            var timeoutpins = MyMap.MapElements.Where(pt => pt.ReadData<EventPoint>().Date < DateTime.Now);
+            var timeoutpins = MyMap.MapElements.Where(p => p.ReadData<EventPoint>().TypeOfPoint != PointType.Pitch).Where(pt => pt.ReadData<EventPoint>().Date < DateTime.Now);
             if (timeoutpins.Any())
             {
                 foreach (var pin in timeoutpins.ToList())
@@ -708,7 +708,7 @@ namespace Sportner
             try
             {
                 Geoposition myPosition = await MapController.GetMyLocation();
-                await MyMap.TrySetViewAsync(myPosition.Coordinate.Point, 14, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
+                await MyMap.TrySetViewAsync(myPosition.Coordinate.Point, 15, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
             }
             catch (UnauthorizedAccessException ex)
             {
