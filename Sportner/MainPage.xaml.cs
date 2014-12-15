@@ -214,8 +214,11 @@ namespace Sportner
                     {
                         resultText.AppendLine("Aprašymas: " + mapObject.ReadData<EventPoint>().eventdto.Description);
                     }
-                    resultText.AppendLine("Pradžios laikas: " + mapObject.ReadData<EventPoint>().eventdto.StartTime.ToString("MM-dd HH:mm"));
-                    resultText.AppendLine("Pabaigos laikas: " + mapObject.ReadData<EventPoint>().eventdto.EndTime.ToString("MM-dd HH:mm"));
+                    if (mapObject.ReadData<EventPoint>().TypeOfPoint != PointType.Pitch)
+                    {
+                        resultText.AppendLine("Pradžios laikas: " + mapObject.ReadData<EventPoint>().eventdto.StartTime.ToString("MM-dd HH:mm"));
+                        resultText.AppendLine("Pabaigos laikas: " + mapObject.ReadData<EventPoint>().eventdto.EndTime.ToString("MM-dd HH:mm"));
+                    }
                     resultText.AppendLine("Adresas: " + mapObject.ReadData<EventPoint>().eventdto.Address + ", " +  mapObject.ReadData<EventPoint>().eventdto.City);
                     resultText.AppendLine("");
                     resultText.AppendLine("Sukūrė: " + mapObject.ReadData<EventPoint>().userdto.Username);
@@ -272,7 +275,12 @@ namespace Sportner
 
         private async void addPins(Sports type, PointType ptype, TimeSpan time)
         {
-            var filteredPoints = points.Where(p => p.SportsType.Equals(type)).Where(pt => pt.TypeOfPoint.Equals(ptype)).Where(pn => pn.Date <= DateTime.Now.Add(time) && pn.Date > DateTime.Now);
+            var filteredPoints = points.Where(p => p.SportsType.Equals(type)).Where(pt => pt.TypeOfPoint.Equals(ptype));
+
+            if (ptype != PointType.Pitch)
+            {
+                filteredPoints = filteredPoints.Where(pn => pn.Date <= DateTime.Now.Add(time) && pn.Date > DateTime.Now);
+            }
             
             try
             {
