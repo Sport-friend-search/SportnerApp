@@ -66,7 +66,7 @@ namespace Sportner
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: Prepare page for display here.
 
@@ -82,6 +82,17 @@ namespace Sportner
                 displayAllPins();
                 MyMap.Center = new Geopoint(new BasicGeoposition { Latitude = 54.693759, Longitude = 25.275651 });
                 MyMap.ZoomLevel = 14;
+
+                try
+                {
+                    Geoposition myPosition = await MapController.GetMyLocation();
+                    await MyMap.TrySetViewAsync(new Geopoint(new BasicGeoposition { Latitude = myPosition.Coordinate.Point.Position.Latitude, Longitude = myPosition.Coordinate.Point.Position.Latitude }), 14, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    // TODO
+                }
+
                 firstTime = false;
             }
             base.OnNavigatedTo(e);
@@ -89,16 +100,6 @@ namespace Sportner
 
         private async void loadPoints()
         {
-            //points.Add(new EventPoint(Sports.Basketball, PointType.Game, 147, new DateTime(2014, 12, 9, 18, 30, 0), 54.696536, 25.283834));
-            //points.Add(new EventPoint(Sports.Basketball, PointType.Pitch, 148, new DateTime(), 54.697466, 25.288447));
-            //points.Add(new EventPoint(Sports.Basketball, PointType.Training, 149, new DateTime(2014, 12, 9, 20, 15, 0), 54.702215, 25.271131));
-            //points.Add(new EventPoint(Sports.Soccer, PointType.Game, 150, new DateTime(2014, 12, 10, 9, 0, 0), 54.693486, 25.289520));
-            //points.Add(new EventPoint(Sports.Soccer, PointType.OfficialEvent, 153, new DateTime(2014, 12, 10, 10, 0, 0), 54.696229, 25.259359));
-            //points.Add(new EventPoint(Sports.Volleyball, PointType.Game, 154, new DateTime(2014, 12, 14, 13, 15, 0), 54.693178, 25.274122));
-            //points.Add(new EventPoint(Sports.Volleyball, PointType.Training, 155, new DateTime(2014, 12, 9, 23, 30, 0), 54.692831, 25.274336));
-            //points.Add(new EventPoint(Sports.Volleyball, PointType.Training, 156, new DateTime(2014, 12, 31, 23, 59, 0), 54.697481, 25.266805));
-            //points.Add(new EventPoint(Sports.Tennis, PointType.Pitch, 161, new DateTime(), 54.700457, 25.251935));
-
             EventsController eController = new EventsController();
             var getev = await eController.GetAllEventsPoints();
             points.Clear();
@@ -180,7 +181,7 @@ namespace Sportner
                     resultText.AppendLine("Pabaigos laikas: " + mapObject.ReadData<EventPoint>().eventdto.EndTime.ToString("MM-dd HH:mm"));
                     resultText.AppendLine("Adresas: " + mapObject.ReadData<EventPoint>().eventdto.Address + ", " +  mapObject.ReadData<EventPoint>().eventdto.City);
                     resultText.AppendLine("");
-                    resultText.AppendLine(mapObject.ReadData<EventPoint>().userdto.Username);
+                    resultText.AppendLine("Sukūrė: " + mapObject.ReadData<EventPoint>().userdto.Username);
                     selectedUser = mapObject.ReadData<EventPoint>().userdto;
 
                 }

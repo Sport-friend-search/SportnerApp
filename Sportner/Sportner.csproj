@@ -83,6 +83,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventsController.cs" />
+    <Compile Include="MapController.cs" />
     <Compile Include="Pages\AddEventPage.xaml.cs">
       <DependentUpon>AddEventPage.xaml</DependentUpon>
     </Compile>
