@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -39,8 +40,12 @@ namespace Sportner.Pages
 
             blockFirstName.Text = user.Username ?? "-";
             blockLastName.Text = user.Email ?? "-";
-            blockBirthdate.Text = user.BirthDate.ToString();
+            blockBirthdate.Text = user.BirthDate.Value.ToString("yyyy-MM-dd");
             blockPhoneNumber.Text = user.PhoneNumber.ToString();
+            if(blockPhoneNumber.Text.Equals("")){
+                blockPhoneNumber.Text = "nenurodytas";
+                blockPhoneNumber.Foreground = new SolidColorBrush(Colors.White);
+            }
         }
 
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
@@ -55,7 +60,9 @@ namespace Sportner.Pages
 
         private void blockPhoneNumber_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(blockPhoneNumber.Text, blockFirstName.Text);
+            if(!blockPhoneNumber.Text.Equals("nenurodytas")){
+                Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(blockPhoneNumber.Text, blockFirstName.Text);
+            }
         }
     }
 }

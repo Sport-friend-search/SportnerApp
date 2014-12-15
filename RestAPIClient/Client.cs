@@ -57,11 +57,6 @@ namespace RestAPIClient
 
                 GetFilteredEventsResponse jsonResponse = JsonConvert.DeserializeObject<GetFilteredEventsResponse>(jsonMessage);
                 
-                //List<EventDto> eventlist = new List<EventDto>();
-                //foreach (EventWithUserDto item in jsonResponse.EventsWithUsers)
-                //{
-                //    eventlist.Add(item.Event);
-                //}
                 return jsonResponse.EventsWithUsers;
             }
         }

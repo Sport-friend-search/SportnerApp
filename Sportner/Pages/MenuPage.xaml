@@ -16,9 +16,6 @@
             <PivotItem Header="mano įvykiai">
                 <Grid/>
             </PivotItem>
-            <PivotItem Header="sportneriai">
-                <Grid/>
-            </PivotItem>
             <PivotItem Header="pranešimai">
                 <Grid/>
             </PivotItem>

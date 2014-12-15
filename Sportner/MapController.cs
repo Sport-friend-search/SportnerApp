@@ -32,17 +32,21 @@ namespace Sportner
         static public async Task<Geoposition> GetMyLocation()
         {
             Geolocator geolocator = new Geolocator();     
-            geolocator.DesiredAccuracyInMeters = 50;     
+            geolocator.DesiredAccuracyInMeters = 100;  
+   
             try     
             {          
-                Geoposition geoposition = await geolocator.GetGeopositionAsync(maximumAge: TimeSpan.FromMinutes(5), timeout: TimeSpan.FromSeconds(10));
+                Geoposition geoposition = await geolocator.GetGeopositionAsync(maximumAge: TimeSpan.FromMinutes(2), timeout: TimeSpan.FromSeconds(10));
                 return geoposition;
-            }     
-            catch (UnauthorizedAccessException e)     
-            {         
-                // the app does not have the right capability or the location master switch is off   
-                throw e;
-            } 
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -73,9 +73,9 @@ namespace Sportner
                 boxEmail.Text = string.Empty;
                 boxEmail.Background = new SolidColorBrush(Colors.Red);
             }
-            if (boxFirstName.Text == "" || boxLastName.Text == "" || boxEmail.Text == "" || boxPassword.Password == "")
+            if (boxFirstName.Text == "" || boxLastName.Text == "" || boxEmail.Text == "" || boxPassword.Password.Trim() == "")
             {
-                if (boxPassword.Password == "")
+                if (boxPassword.Password.Trim() == "")
                 {
                     boxPassword.Background = new SolidColorBrush(Colors.Red);
                 }
@@ -119,17 +119,22 @@ namespace Sportner
 
             if (boxBasketball.IsChecked.Equals(true))
             {
-                sportIdsList.Add((int)SportsEnum.BasketBall);
+                sportIdsList.Add((int)Sports.Basketball);
             }
 
             if (boxTennis.IsChecked.Equals(true))
             {
-                sportIdsList.Add((int)SportsEnum.Tennis);
+                sportIdsList.Add((int)Sports.Tennis);
             }
 
             if (boxVolleyball.IsChecked.Equals(true))
             {
-                sportIdsList.Add((int)SportsEnum.Volleyball);
+                sportIdsList.Add((int)Sports.Volleyball);
+            }
+
+            if (boxFootball.IsChecked.Equals(true))
+            {
+                sportIdsList.Add((int)Sports.Volleyball);
             }
 
             return sportIdsList;

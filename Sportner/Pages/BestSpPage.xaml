@@ -10,10 +10,10 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="SPORTNER" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}" Width="90"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="visi žaidėjai" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Width="364"/>
-        <StackPanel HorizontalAlignment="Left" Height="467" Margin="31,99,0,0" VerticalAlignment="Top" Width="338">
-            <ListView x:Name="listSportner" HorizontalAlignment="Left" Height="465" Width="338" SelectionChanged="ListView_SelectionChanged" FontSize="20"/>
-        </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="visi žaidėjai" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Width="364" FontFamily="Global User Interface"/>
+        <ScrollViewer Margin="0,99,0,62">
+            <ListView x:Name="listSportner" SelectionChanged="ListView_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+        </ScrollViewer>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button x:Name="buttonCancel" Content="Grįžti" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="145" Click="buttonCancel_Click"/>
         </StackPanel>

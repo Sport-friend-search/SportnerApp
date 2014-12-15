@@ -27,12 +27,12 @@
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Pradžia:" VerticalAlignment="Top" Width="319" FontSize="22"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320">
                 <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="0,0,20,0" VerticalAlignment="Top" Width="138"/>
-                <TimePicker x:Name="startTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138"/>
+                <TimePicker x:Name="startTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" FontFamily="Global User Interface" ClockIdentifier="24HourClock"/>
             </StackPanel>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Pabaiga:" VerticalAlignment="Top" Width="319" FontSize="22"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320">
                 <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="0,0,20,0" VerticalAlignment="Top" Width="138"/>
-                <TimePicker x:Name="endTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138"/>
+                <TimePicker x:Name="endTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" ClockIdentifier="24HourClock"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">

@@ -18,7 +18,7 @@
                 <TextBlock HorizontalAlignment="Center" Height="20" TextWrapping="Wrap" Text="Pavardė*:" VerticalAlignment="Top" Width="319" FontSize="20"/>
                 <TextBox x:Name="boxLastName" HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="319"/>
                 <TextBlock HorizontalAlignment="Center" Height="25" TextWrapping="Wrap" Text="Gimimo data*:" VerticalAlignment="Top" Width="319" FontSize="20"/>
-                <DatePicker x:Name="boxBirthDate" HorizontalAlignment="Center" VerticalAlignment="Top" CalendarIdentifier="GregorianCalendar" Width="319" Height="55"/>
+                <DatePicker x:Name="boxBirthDate" HorizontalAlignment="Center" VerticalAlignment="Top" CalendarIdentifier="GregorianCalendar" Width="319" Height="55" FontFamily="Global User Interface"/>
                 <TextBlock HorizontalAlignment="Center" Height="27" TextWrapping="Wrap" Text="Telefono numeris:" VerticalAlignment="Top" Width="319" FontSize="20"/>
                 <TextBox x:Name="boxPhoneNumber" HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="319"/>
                 <TextBlock HorizontalAlignment="Center" Height="27" TextWrapping="Wrap" Text="El. Paštas*:" VerticalAlignment="Top" Width="319" FontSize="20"/>

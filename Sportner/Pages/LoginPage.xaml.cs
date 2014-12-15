@@ -49,9 +49,9 @@ namespace Sportner
                 boxName.Text = string.Empty;
                 boxName.Background = new SolidColorBrush(Colors.Red);
             }
-            if (boxName.Text == "" || boxPassword.Password == "")
+            if (boxName.Text == "" || boxPassword.Password.Trim() == "")
             {
-                if (boxPassword.Password == "")
+                if (boxPassword.Password.Trim() == "")
                 {
                     boxPassword.Background = new SolidColorBrush(Colors.Red);
                 }

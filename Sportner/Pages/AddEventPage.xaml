@@ -10,13 +10,14 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="SPORTNER" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}" Width="90"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="įvykio pridėjimas" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Width="364"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="pridėjimas" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Width="364"/>
         <StackPanel Margin="0,90,0,80">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Pasirinkite tipą:" VerticalAlignment="Top" Width="319" FontSize="20"/>
             <ComboBox HorizontalAlignment="Center" VerticalAlignment="Top" Width="331" IsSynchronizedWithCurrentItem="False" Margin="0">
-                <ComboBoxItem Content="Žaidimas" IsSelected="True"/>
-                <ComboBoxItem Content="Treniruotė"/>
-                <ComboBoxItem Content="Oficialus renginys"/>
+                <ComboBoxItem Content="Žaidimas" IsSelected="True" IsTapEnabled="False"/>
+                <ComboBoxItem IsEnabled="False" Content="Treniruotė"/>
+                <ComboBoxItem IsEnabled="False" Content="Oficialus renginys"/>
+                <ComboBoxItem IsEnabled="False" Content="Aikštelė"/>
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">

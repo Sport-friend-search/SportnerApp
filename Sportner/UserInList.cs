@@ -17,7 +17,6 @@ namespace Sportner
 
         public override string ToString()
         {
-            
             return Username + " / " + Email;
         }
     }

@@ -44,6 +44,7 @@ namespace Sportner
         private bool tennisToggleTap = true;
         private bool firstTime;
         private TimeSpan showingHours = new TimeSpan(12, 0, 0);
+        private double radiusAround = 20;
         public DispatcherTimer dt = new DispatcherTimer();
 
         public MainPage()
@@ -52,15 +53,16 @@ namespace Sportner
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
             firstTime = true;
-            dt.Tick += dt_Tick;
+            dt.Tick += reload;
             dt.Interval = TimeSpan.FromMilliseconds(2000);
             dt.Start();
         }
 
-        private void dt_Tick(object sender, object e)
+        private void reload(object sender, object e)
         {
             loadPoints();
         }
+
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -75,25 +77,28 @@ namespace Sportner
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+            MyMap.MapElements.Clear();
             if (firstTime)
             {
-                MyMap.MapElements.Clear();
-                loadPoints();
-                displayAllPins();
-                MyMap.Center = new Geopoint(new BasicGeoposition { Latitude = 54.693759, Longitude = 25.275651 });
-                MyMap.ZoomLevel = 14;
+                //loadPoints();
+                //displayAllPins();
+                MyMap.Center = new Geopoint(new BasicGeoposition { Latitude = 55.285252, Longitude = 24.034045 });
+                MyMap.ZoomLevel = 7;
+                firstTime = false;
 
                 try
                 {
                     Geoposition myPosition = await MapController.GetMyLocation();
-                    await MyMap.TrySetViewAsync(new Geopoint(new BasicGeoposition { Latitude = myPosition.Coordinate.Point.Position.Latitude, Longitude = myPosition.Coordinate.Point.Position.Latitude }), 14, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
+                    await MyMap.TrySetViewAsync(myPosition.Coordinate.Point, 14, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
                 }
                 catch (UnauthorizedAccessException ex)
                 {
-                    // TODO
+                    // TODO APP DONT HAVE ACCESS TO GPS
                 }
-
-                firstTime = false;
+                catch (Exception ex)
+                {
+                    // TODO GPS TURNED OFF AND ETC.
+                }
             }
             base.OnNavigatedTo(e);
         }
@@ -104,6 +109,35 @@ namespace Sportner
             var getev = await eController.GetAllEventsPoints();
             points.Clear();
             points.AddRange(getev);
+            try
+            {
+                Geoposition myPosition = await MapController.GetMyLocation();
+                var pins = MyMap.MapElements.Where(pt => !MapController.IsInRadius(pt.ReadData<EventPoint>().Point, myPosition.Coordinate.Point, radiusAround));
+                if (pins.Any())
+                {
+                    foreach (var pin in pins.ToList())
+                    {
+                        MyMap.MapElements.Remove(pin);
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // TODO APP DONT HAVE ACCESS TO GPS
+            }
+            catch (Exception ex)
+            {
+                // TODO GPS TURNED OFF AND ETC.
+            }
+
+            var timeoutpins = MyMap.MapElements.Where(pt => pt.ReadData<EventPoint>().Date < DateTime.Now);
+            if (timeoutpins.Any())
+            {
+                foreach (var pin in timeoutpins.ToList())
+                {
+                    MyMap.MapElements.Remove(pin);
+                }
+            }
             //removePins(Sports.Basketball);
             //removePins(Sports.Soccer);
             //removePins(Sports.Tennis);
@@ -176,7 +210,10 @@ namespace Sportner
               
                 foreach (var mapObject in sender.FindMapElementsAtOffset(args.Position))
                 {
-                    resultText.AppendLine("Aprašymas: " + mapObject.ReadData<EventPoint>().eventdto.Description);
+                    if (mapObject.ReadData<EventPoint>().eventdto.Description.Trim() != "")
+                    {
+                        resultText.AppendLine("Aprašymas: " + mapObject.ReadData<EventPoint>().eventdto.Description);
+                    }
                     resultText.AppendLine("Pradžios laikas: " + mapObject.ReadData<EventPoint>().eventdto.StartTime.ToString("MM-dd HH:mm"));
                     resultText.AppendLine("Pabaigos laikas: " + mapObject.ReadData<EventPoint>().eventdto.EndTime.ToString("MM-dd HH:mm"));
                     resultText.AppendLine("Adresas: " + mapObject.ReadData<EventPoint>().eventdto.Address + ", " +  mapObject.ReadData<EventPoint>().eventdto.City);
@@ -198,8 +235,22 @@ namespace Sportner
                 MapLocationFinderResult result = await MapLocationFinder.FindLocationsAtAsync(new Geopoint(args.Location.Position));
                 if (result.Status == MapLocationFinderStatus.Success)
                 {
-                    string address = result.Locations[0].Address.Street + " " + result.Locations[0].Address.StreetNumber + ", " + result.Locations[0].Address.Town;
-                    resultText.AppendLine("Sukurti naują įvykį adresu " + address + "?");
+                    resultText.AppendLine("Sukurti naują įvykį?");
+                    resultText.AppendLine("");
+                    if (result.Locations[0].Address.Street != "" && result.Locations[0].Address.StreetNumber != "" && result.Locations[0].Address.Town != "")
+                    {
+                        string address = result.Locations[0].Address.Street + " " + result.Locations[0].Address.StreetNumber + ", " + result.Locations[0].Address.Town;
+                        resultText.AppendLine("Apytikslis adresas: " + address);
+                    }
+                    else if (result.Locations[0].Address.Street == "" && result.Locations[0].Address.StreetNumber == "" && result.Locations[0].Address.Town != "")
+                    {
+                        resultText.AppendLine("Apytikslis adresas: " + result.Locations[0].Address.Town);
+                    }
+                    else if (result.Locations[0].Address.Street != "" && result.Locations[0].Address.StreetNumber == "" && result.Locations[0].Address.Town != "")
+                    {
+                        string address = result.Locations[0].Address.Street + ", " + result.Locations[0].Address.Town;
+                        resultText.AppendLine("Apytikslis adresas: " + address);
+                    }
                 }
                 MessageDialog dialog = new MessageDialog(resultText.ToString());
                 dialog.Commands.Add(new UICommand("taip", new UICommandInvokedHandler(this.CommandInvokedHandler)));
@@ -219,9 +270,24 @@ namespace Sportner
             }
         }
 
-        private void addPins(Sports type, PointType ptype, TimeSpan time)
+        private async void addPins(Sports type, PointType ptype, TimeSpan time)
         {
             var filteredPoints = points.Where(p => p.SportsType.Equals(type)).Where(pt => pt.TypeOfPoint.Equals(ptype)).Where(pn => pn.Date <= DateTime.Now.Add(time) && pn.Date > DateTime.Now);
+            
+            try
+            {
+                Geoposition myPosition = await MapController.GetMyLocation();
+                filteredPoints = filteredPoints.Where(p => MapController.IsInRadius(p.Point, myPosition.Coordinate.Point, radiusAround));
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // TODO APP DONT HAVE ACCESS TO GPS
+            }
+            catch (Exception ex)
+            {
+                // TODO GPS TURNED OFF AND ETC.
+            }
+
             foreach (EventPoint point in filteredPoints)
             {
                 Point anchorPoint = new Point(0.5, 0.5);
@@ -465,6 +531,30 @@ namespace Sportner
             }
         }
 
+        private async void hideAccordingRadius(double radius)
+        {
+            try
+            {
+                Geoposition myPosition = await MapController.GetMyLocation();
+                var pins = MyMap.MapElements.Where(pt => !MapController.IsInRadius(pt.ReadData<EventPoint>().Point, myPosition.Coordinate.Point, radiusAround));
+                if (pins.Any())
+                {
+                    foreach (var pin in pins.ToList())
+                    {
+                        MyMap.MapElements.Remove(pin);
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // TODO APP DONT HAVE ACCESS TO GPS
+            }
+            catch (Exception ex)
+            {
+                // TODO GPS TURNED OFF AND ETC.
+            }
+        }
+
         private void AppBarButton_Click_4(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MenuPage), 0);
@@ -483,17 +573,17 @@ namespace Sportner
 
         private void AppBarButton_Click_7(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MenuPage), 3);
+            Frame.Navigate(typeof(MenuPage), 2);
         }
 
         private void AppBarButton_Click_2(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MenuPage), 4);
+            Frame.Navigate(typeof(MenuPage), 3);
         }
 
         private void AppBarButton_Click_3(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MenuPage), 5);
+            Frame.Navigate(typeof(MenuPage), 4);
         }
 
         private void AppBarButton_Click_8(object sender, RoutedEventArgs e)
@@ -577,6 +667,56 @@ namespace Sportner
             if (slider1 != null)
             {
                 distanceInfo.Text = slider1.Value + " km";
+                double oldRadius = radiusAround;
+                radiusAround = Double.Parse(slider1.Value.ToString());
+                if (oldRadius > radiusAround)
+                {
+                    hideAccordingRadius(radiusAround);
+                }
+                else
+                {
+                    if (trainingsSwitch.IsOn)
+                    {
+                        showTrainings();
+                    }
+                    if (basketToggleTap)
+                    {
+                        addPins(Sports.Basketball, PointType.Game, showingHours);
+                        addPins(Sports.Basketball, PointType.OfficialEvent, showingHours);
+                    }
+                    if (soccerToggleTap)
+                    {
+                        addPins(Sports.Soccer, PointType.Game, showingHours);
+                        addPins(Sports.Soccer, PointType.OfficialEvent, showingHours);
+                    }
+                    if (volleyToggleTap)
+                    {
+                        addPins(Sports.Volleyball, PointType.Game, showingHours);
+                        addPins(Sports.Volleyball, PointType.OfficialEvent, showingHours);
+                    }
+                    if (tennisToggleTap)
+                    {
+                        addPins(Sports.Tennis, PointType.Game, showingHours);
+                        addPins(Sports.Tennis, PointType.OfficialEvent, showingHours);
+                    }
+                }
+            }
+        }
+
+        private async void AppBarButton_Click_9(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Geoposition myPosition = await MapController.GetMyLocation();
+                await MyMap.TrySetViewAsync(myPosition.Coordinate.Point, 14, MyMap.Heading, MyMap.Pitch, MapAnimationKind.Bow);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // TODO APP DONT HAVE ACCESS TO GPS
+            }
+            catch (Exception ex)
+            {
+                // TODO GPS TURNED OFF AND ETC.
             }
         }
 

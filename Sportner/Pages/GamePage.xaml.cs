@@ -45,8 +45,8 @@ namespace Sportner
             MapLocationFinderResult result = await MapLocationFinder.FindLocationsAtAsync(evPoint);
             if (result.Status == MapLocationFinderStatus.Success)
             {
-                boxAddress.Text = result.Locations[0].Address.Street + " " + result.Locations[0].Address.StreetNumber;
-                boxCity.Text = result.Locations[0].Address.Town;
+                boxAddress.Text = (result.Locations[0].Address.Street + " " + result.Locations[0].Address.StreetNumber).Trim();
+                boxCity.Text = result.Locations[0].Address.Town.Trim();
             }
         }
 
@@ -55,13 +55,13 @@ namespace Sportner
             boxCity.Background = new SolidColorBrush(Colors.White);
             boxAddress.Background = new SolidColorBrush(Colors.White);
 
-            if (boxCity.Text == "" || boxAddress.Text == "")
+            if (boxCity.Text.Trim() == "" || boxAddress.Text.Trim() == "")
             {
-                if (boxCity.Text == "")
+                if (boxCity.Text.Trim() == "")
                 {
                     boxCity.Background = new SolidColorBrush(Colors.Red);
                 }
-                if (boxAddress.Text == "")
+                if (boxAddress.Text.Trim() == "")
                 {
                     boxAddress.Background = new SolidColorBrush(Colors.Red);
                 }

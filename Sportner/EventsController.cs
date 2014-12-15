@@ -26,16 +26,6 @@ namespace Sportner
                  eventpoints.Add(new EventPoint(sport, type, eventItem.Event.EventId, eventItem.Event.StartTime, eventItem.Event.Latitude, eventItem.Event.Longitude, eventItem.User, eventItem.Event));
              }
              return eventpoints;
-             //List<EventDto> response = await client.GetAllEvents();
-             //List<EventPoint> eventpoints = new List<EventPoint>();
-             
-             //foreach (EventDto eventItem in response)
-             //{
-             //    Sports sport = (Sports)eventItem.SportId;
-             //    PointType type = (PointType)eventItem.EventTypeId;
-             //    eventpoints.Add(new EventPoint(sport, type, eventItem.EventId, eventItem.StartTime, eventItem.Latitude, eventItem.Longitude));
-             //}
-             //return eventpoints;
          }
 
          public async Task<HttpStatusCode> AddEvent(EventDto eventIns)
