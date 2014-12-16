@@ -11,9 +11,9 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="SPORTNER" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}" Width="90"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="prisijungimas" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Width="364"/>
-        <TextBlock Height="39" Margin="0,132,0,0" TextWrapping="Wrap" Text="El. Paštas*:" VerticalAlignment="Top" Width="331" FontSize="20" HorizontalAlignment="Center"/>
+        <TextBlock Height="39" Margin="0,132,0,0" TextWrapping="Wrap" Text="El. Paštas:" VerticalAlignment="Top" Width="331" FontSize="20" HorizontalAlignment="Center"/>
         <TextBox x:Name="boxName" HorizontalAlignment="Center" Height="40" Margin="0,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331"/>
-        <TextBlock HorizontalAlignment="Center" Height="39" Margin="0,211,0,0" TextWrapping="Wrap" Text="Slaptažodis*:" VerticalAlignment="Top" Width="331" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Center" Height="39" Margin="0,211,0,0" TextWrapping="Wrap" Text="Slaptažodis:" VerticalAlignment="Top" Width="331" FontSize="20"/>
         <PasswordBox x:Name="boxPassword" HorizontalAlignment="Center" Height="40" Margin="0,236,0,0" VerticalAlignment="Top" Width="331"/>
         <Button Content="Prisijungti" HorizontalAlignment="Center" Height="39" Margin="3, 306,0,0" VerticalAlignment="Top" Width="157" Click="Button_Click"/>
         <Button x:Name="buttonCancel" Content="Grįžti" HorizontalAlignment="Center" Height="20" Margin="0,364,0,0" VerticalAlignment="Top" Width="157" Click="buttonCancel_Click"/>

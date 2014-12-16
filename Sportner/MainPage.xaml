@@ -26,17 +26,17 @@
         <AppBarButton HorizontalAlignment="Left" Icon="ZoomOut" Label="" Margin="-10,-2,0,0" VerticalAlignment="Top" Height="60" Width="76" Foreground="Black" RequestedTheme="Light" Click="AppBarButton_Click_1"/>
         <AppBarButton HorizontalAlignment="Left" Icon="ZoomIn" Label="" Margin="34,-2,0,0" VerticalAlignment="Top" Height="60" Width="67" Foreground="Black" RequestedTheme="Light" Click="AppBarButton_Click"/>
         <AppBarButton HorizontalAlignment="Left" Icon="Target" Label="" Margin="78,-2,0,0" VerticalAlignment="Top" Height="60" Width="76" Foreground="Black" RequestedTheme="Light" Click="AppBarButton_Click_9"/>
-        <AppBarButton HorizontalAlignment="Left" Icon="More" Label="" Margin="331,-2,0,0" VerticalAlignment="Top" Foreground="#FF131313" RequestedTheme="Light" Height="58" Width="69">
+        <AppBarButton HorizontalAlignment="Right" Icon="More" Label="" Margin="0,-2,0,0" VerticalAlignment="Top" Foreground="Black" RequestedTheme="Light" Height="58" Width="69">
             <AppBarButton.Flyout>
                 <Flyout>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
                             <TextBlock Text="greitas filtravimas" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Image x:Name="basketButton" Height="65" Width="65" Source="Assets/Basketball-icon.png" Stretch="None" Tapped="basketButton_Tapped"/>
-                            <Image x:Name="soccerButton" Height="65" Width="65" Source="Assets/Soccer-icon.png" Stretch="None" Tapped="soccerButton_Tapped"/>
-                            <Image x:Name="volleyButton" Height="65" Width="65" Stretch="None" Source="Assets/Volleyball-icon.png" Tapped="volleyButton_Tapped"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                            <Image x:Name="basketButton" Height="65" Width="65" Source="Assets/Basketball-icon.png" Stretch="None" Tapped="basketButton_Tapped" Margin="0,0,15,0"/>
+                            <Image x:Name="soccerButton" Height="65" Width="65" Source="Assets/Soccer-icon.png" Stretch="None" Tapped="soccerButton_Tapped" Margin="0,0,15,0"/>
+                            <Image x:Name="volleyButton" Height="65" Width="65" Stretch="None" Source="Assets/Volleyball-icon.png" Tapped="volleyButton_Tapped" Margin="0,0,15,0"/>
                             <Image x:Name="tennisButton" Height="65" Width="65" Stretch="None" Source="Assets/Tennis-icon.png" Tapped="tennisButton_Tapped"/>
                         </StackPanel>
                         <ToggleSwitch x:Name="pitchesSwitch" OffContent="nerodomos" OnContent="rodomos" Header="aikštelės" RequestedTheme="Dark" BorderThickness="0" Height="60" Margin="65,0" Toggled="ToggleSwitch_Toggled"/>

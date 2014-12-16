@@ -66,17 +66,23 @@ namespace Sportner
 
                 // Can be logged in
                 var loginobj = await new UserController().Login(email, password);
-                if (loginobj.IsAuthorized)
+                if (loginobj != null)
                 {
-                    UserInfo.UserId = loginobj.UserId;
-                    this.Frame.Navigate(typeof(MainPage));
-                }
-
-                else
-                {
-                    MessageDialog msg = new MessageDialog("Duomenys neteisingi.", "Klaida!");
-                    msg.Commands.Add(new UICommand("uždaryti", new UICommandInvokedHandler(this.CommandInvokedHandler)));
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => await msg.ShowAsync());
+                    if (loginobj.IsAuthorized)
+                    {
+                        UserInfo.UserId = loginobj.UserId;
+                        this.Frame.Navigate(typeof(MainPage));
+                    }
+                    else
+                    {
+                        MessageDialog msg = new MessageDialog("Duomenys neteisingi.", "Klaida!");
+                        msg.Commands.Add(new UICommand("uždaryti", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => await msg.ShowAsync());
+                    }
+                } else {
+                        MessageDialog msg = new MessageDialog("Patikrinkite interneto ryšį.", "Klaida!");
+                        msg.Commands.Add(new UICommand("uždaryti", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => await msg.ShowAsync());
                 }
             }            
         }

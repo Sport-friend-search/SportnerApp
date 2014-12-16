@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="2d9ec592-ad34-47b9-ae9f-21c93f7f91fb" Publisher="CN=Mantas" Version="1.0.0.1" />
+  <Identity Name="2d9ec592-ad34-47b9-ae9f-21c93f7f91fb" Publisher="CN=Mantas" Version="1.0.0.2" />
   <mp:PhoneIdentity PhoneProductId="2d9ec592-ad34-47b9-ae9f-21c93f7f91fb" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Sportner</DisplayName>

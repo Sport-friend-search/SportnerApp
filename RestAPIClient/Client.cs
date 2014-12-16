@@ -42,7 +42,7 @@ namespace RestAPIClient
 
                 GetFilteredEventsRequest requestData = new GetFilteredEventsRequest
                 {
-                    City = "Vilnius"
+                    City = ""
                 };
 
                 var json_object = JsonConvert.SerializeObject(requestData);

@@ -12,7 +12,8 @@
     <Grid x:Name="myGrid">
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="SPORTNER" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}" Width="90"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="pridėti žaidimą" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Width="364"/>
-        <StackPanel Margin="0,90,0,80">
+        <ScrollViewer>
+            <StackPanel Margin="0,90,0,80">
             <TextBox x:Name="boxCity" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="319" PlaceholderText="Įveskite miestą..."/>
             <TextBox x:Name="boxAddress" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="319" PlaceholderText="Įveskite adresą..."/>
             <TextBox x:Name="boxDescription" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="319" PlaceholderText="Aprašymas..."/>
@@ -30,11 +31,12 @@
                 <TimePicker x:Name="startTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" FontFamily="Global User Interface" ClockIdentifier="24HourClock"/>
             </StackPanel>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Pabaiga:" VerticalAlignment="Top" Width="319" FontSize="22"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320">
-                <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="0,0,20,0" VerticalAlignment="Top" Width="138"/>
-                <TimePicker x:Name="endTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" ClockIdentifier="24HourClock"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320">
+                    <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="0,0,20,0" VerticalAlignment="Top" Width="138"/>
+                    <TimePicker x:Name="endTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" ClockIdentifier="24HourClock"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button x:Name="buttonConfirm" Content="Pridėti" HorizontalAlignment="Left" Height="25" Margin="0,0,20,0" VerticalAlignment="Top" Width="145" Click="buttonConfirm_Click"/>
             <Button x:Name="buttonCancel" Content="Grįžti" HorizontalAlignment="Left" Height="25" Margin="0,0,0,0" VerticalAlignment="Top" Width="145" Click="buttonCancel_Click"/>

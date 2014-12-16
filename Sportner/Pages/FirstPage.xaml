@@ -12,8 +12,10 @@
         <Image Source="ms-appx:///Assets/entrepreneurial_volleyball.png" Stretch="None" NineGrid="0" Margin="0,-130,0,0"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="SPORTNER" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}" Width="90"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="sveiki atvykę" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Width="364"/>
-        <Button Content="Prisijungti" HorizontalAlignment="Left" Margin="114,454,0,0" VerticalAlignment="Top" Height="61" Width="192" Click="Button_Click"/>
-        <Button Content="Registruotis" HorizontalAlignment="Left" Margin="114,517,0,0" VerticalAlignment="Top" Height="61" Width="192" Click="Button_Click_1"/>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,100,0,80">
+            <Button Content="Prisijungti" HorizontalAlignment="Center" Height="61" Width="192" Click="Button_Click"/>
+            <Button Content="Registruotis" HorizontalAlignment="Center" Height="61" Width="192" Click="Button_Click_1"/>
+        </StackPanel>
 
     </Grid>
 </Page>
